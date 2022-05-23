@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+Uploadcare public key identifies a target project for uploads.
+This pen uses "demopublickey" which points to the demo account.
+Note, all files get deleted from that account every few hours.
+-->
+<script>
+    UPLOADCARE_PUBLIC_KEY = "demopublickey";
+  </script>
+  <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script>
+  <h1>Uploadcare Widget. Crop image to circle..</h1>
+  <p>
+    This Pen shows you how to use the Uploadcare Widget UI to crop any image to circle.
+  Technically, it uses some CSS to round out an image cropped using the 1:1 ratio.
+  </p>
+  <!-- The input element below will turn into the widget -->
+  <input type="hidden" role="uploadcare-uploader" data-crop="1:1" data-images-only >
+  <!-- Your preview will be put here -->
+  <div>
+    <img src="" alt="" id="preview" width=300 height=300 />
+  </div>
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+  <script>
+      // Getting an instance of the widget.
+const widget = uploadcare.Widget('[role=uploadcare-uploader]');
+// Selecting an image to be replaced with the uploaded one.
+const preview = document.getElementById('preview');
+// "onUploadComplete" lets you get file info once it has been uploaded.
+// "cdnUrl" holds a URL of the uploaded file: to replace a preview with.
+widget.onUploadComplete(fileInfo => {
+  preview.src = fileInfo.cdnUrl;
+})
+  </script>
+</body>
+</html>
